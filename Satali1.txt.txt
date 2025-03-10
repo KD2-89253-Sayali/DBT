@@ -1,1 +1,90 @@
- xssmcms
+1) equvijoin :-
+
+
+1)must used the ansii stnadard
+2)ansii standard synatax is used in ccee exam asked;
+3) by using ansii standard :- select ename,dname from emp inner join dept on emp.deptno=dept.deptno;
+
+cartesion join;
+select ename,dname from emp cross join dept ;
+
+left outter join
+
+
+SELECT *
+FROM Customers
+WHERE Rating >= ANY (
+    SELECT Rating
+    FROM Customers
+    WHERE CustomerName = 'Serres'
+);
+
+SELECT column_name(s)
+FROM table_name
+WHERE column_name operator ANY
+  (SELECT column_name
+  FROM table_name
+  WHERE condition);
+
+SELECT c.*
+FROM CUSTOMERS c
+WHERE c.RATING >= ANY (
+    SELECT c2.RATING
+    FROM CUSTOMERS c2
+    JOIN SALESPEOPLE s ON c2.SNUM = s.SNUM
+    WHERE s.SNAME = 'Serres'
+);
+SELECT *
+FROM CUSTOMERS
+WHERE RATING >= ANY (
+    SELECT RATING
+    FROM CUSTOMERS
+    WHERE SNUM = (
+        SELECT SNUM
+        FROM SALESPEOPLE
+        WHERE SNAME = 'Serres')
+);
+
+Selecet *
+FROM SALESPEOPLE 
+WHERE s.CITY <> ALL (
+    SELECT c.CITY
+    FROM CUSTOMERS c
+    WHERE c.SNUM = s.SNUM
+
+);
+
+
+SNUM	SNAME	CITY	COMM
+1007	Rifkin	Barcelona	0.15
+1003	Axelrod	New York	0.10
+
+SELECT *
+FROM ORDERS
+WHERE AMT > ANY (
+    SELECT AMT
+    FROM ORDERS
+    WHERE CNUM IN (
+        SELECT CNUM
+        FROM CUSTOMERS
+        WHERE CITY = 'London'
+    )
+);
+
+ 1) Create a union of two queries that shows the names, cities, and ratings of all 
+customers. Those with rating of 200 or greater will also have the words “High 
+Rating”, while the others will have the words “Low Rating”. 
+
+SELECT CNAME, CITY, RATING, 'High Rating' AS Rating_Category
+FROM CUSTOMERS
+WHERE RATING >= 200
+
+UNION
+
+SELECT CNAME, CITY, RATING, 'Low Rating' AS Rating_Category
+FROM CUSTOMERS
+WHERE RATING < 200;
+
+
+sql-pl
+1) delimeter $$
